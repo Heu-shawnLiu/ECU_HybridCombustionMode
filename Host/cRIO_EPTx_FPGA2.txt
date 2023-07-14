@@ -1,0 +1,799 @@
+<VI syntaxVersion=11 LVversion=20008000 revision=53 name="cRIO_EPTx_FPGA.vi">
+<TITLE><NO_TITLE name="cRIO_EPTx_FPGA.vi"></TITLE>
+<HELP_PATH></HELP_PATH>
+<HELP_TAG></HELP_TAG>
+<RTM_PATH type="default"></RTM_PATH>
+<DESC></DESC>
+<CONTENT>
+	<GROUPER>
+		<PARTS>
+		</PARTS></GROUPER>
+	<CONTROL ID=100 type="自定义类型" name="EPTxSimulatorConfig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=80 type="数值" name="EPTxSimulatorConfig">
+					<DESC></DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSimulatorConfig</STEXT></LABEL></PART>
+					</PARTS>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSimulatorConfig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxDebug">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters which assist in debugging engine sync errors.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=80 type="数值" name="CycleCount">
+							<DESC>Indicates the number of engine cycles counted while the EPTx was in sync.</DESC>
+							<TIP>Indicates the number of engine cycles counted while the EPTx was in sync</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="StartCAD">
+							<DESC>Indicates the engine position where the EPTx initially achieved sync.</DESC>
+							<TIP>Indicates the engine position where the EPTx initially achieved sync</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="EndCAD">
+							<DESC>Indicates the engine position where the EPTx lost sync.</DESC>
+							<TIP>Indicates the engine position where the EPTx lost sync</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Sync">
+							<DESC>Indicates the status of EPTx sync.</DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxDebug</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxTooth">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters indicating the real-time status of primary events and the direction of engine rotation.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Tooth">
+							<DESC>Indicates that a primary signal event has occured, consisting of a rising or falling edge, depending upon configuration within the EPTx Database Editor.  This indicator is a one-clock one-shot.</DESC>
+							<TIP>Indicates that a primary signal event has occured</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Forward">
+							<DESC>Indicates the direction of engine rotation.<LF>
+<LF>
+TRUE: Forward<LF>
+<LF>
+FALSE: Reverse</DESC>
+							<TIP>Indicates the direction of engine rotation</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxTooth</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxSignals">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Contains the Boolean signals required by the EPTx to track engine position.  The Primary signal will always be from the crankshaft.  Auxiliary signals will be from the crankshaft or camshafts.  Typically, these signals are wired from an external  signal conditioning device for engine position sensors.  However, these signals can be simulated within the FPGA for the purposes of bench testing.</DESC>
+					<TIP>Contains the Boolean signals required by the EPTx to track engine position</TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Primary">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux 1">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux 2">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux 3">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux 4">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>EPTxSignals</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxSupervisor_FPGA">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>This cluster is generated at the FPGA level by the EPTx Core or the EPTx Simulator and contains all real-time engine position tracking information necessary for EPTx engine synchronous input and output functions such as Angle-Angle-Pulse, Angle-One-Shot, and Angle-Capture.  The EPTxSupervisor can be routed throughout the FPGA to many different engine-synchronous functions, limited only by FPGA resources.</DESC>
+					<TIP>Contains all real-time engine position tracking information</TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Sync">
+							<DESC>Indicates the status of EPTx sync.</DESC>
+							<TIP>Indicates the status of EPTx sync</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="CADRate">
+							<DESC>Indicates the most recent calculated rotational rate of the crankshaft in Crank Angle Degrees (CAD) per millisecond.</DESC>
+							<TIP>Indicates the most recent calculated rotational rate of the crankshaft in Crank Angle Degrees (CAD) per millisecond</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="CurrentCAD">
+							<DESC>Indicates the current position tracked by the EPTx in Crank Angle Degrees (CAD).</DESC>
+							<TIP>Indicates the current position tracked by the EPTx in Crank Angle Degrees (CAD)</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="HistoryCAD">
+							<DESC>A span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD.  When an angle-one-shot function event is scheduled for the future and then changed to the recent past, a late one-shot event will be triggered if the newly scheduled event (in the past) is within HistoryCAD range of CurrentPosition.</DESC>
+							<TIP>A span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="MaxCAD">
+							<DESC>The total Crank Angle Degrees (CAD) travelled through a complete engine cycle.  A two-stroke engine crankshaft will travel 360 degrees in a complete engine cycle.  A four-stroke engine crankshaft will travel 720 degrees in a complete engine cycle.</DESC>
+							<TIP>The total Crank Angle Degrees (CAD) travelled through a complete engine cycle</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Stall">
+							<DESC>Indicates that the engine speed is less than the Stall Speed specified to the EPTx - Core Control.vi at the RT level.</DESC>
+							<TIP>Indicates that the engine speed is less than the Stall Speed</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Overflow">
+							<DESC>Indicates that the EPTx has encountered a fixed-point math result overflow.  This condition causes a loss of sync.</DESC>
+							<TIP>Indicates that the EPTx has encountered a fixed-point math result overflow</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Ratio_Error">
+							<DESC>Indicates that the actual signal event ratio canot be matched to any possible nominal signal event ratios within the primary signal pattern.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match any possible nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Pattern_Error">
+							<DESC>Indicates that the actual signal event ratio does not match the expected nominal signal event ratio.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match the expected nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Config">
+							<DESC>Indicates that the EPTx has been configured by the RT level device driver.</DESC>
+							<TIP>Indicates that the EPTx has been configured by the RT level device driver</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Watchdog_Error">
+							<DESC>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds.</DESC>
+							<TIP>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux_Warning">
+							<DESC>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location.</DESC>
+							<TIP>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="AvgSpeed">
+							<DESC>Indicates the most recent calculated average rotational rate of the crankshaft in Rotations per Minute (RPM)</DESC>
+							<TIP>Indicates the most recent calculated average rotational rate of the crankshaft in Rotations per Minute (RPM)</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Rcvg_Primary">
+							<DESC>Indicates that the primary signal is changing states, which indicates that the crankshaft is spinning.</DESC>
+							<TIP>Indicates that the primary signal is changing states</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSupervisor_FPGA</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxConfig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=80 type="数值" name="EPTxConfig">
+					<DESC>This cluster should be wired directly from the EPTxConfig output cluster of the EPTx - Core Control.vi at the RT level.<LF>
+<LF>
+ There should be no other interaction with the individual elements of this cluster.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxConfig</STEXT></LABEL></PART>
+					</PARTS>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxConfig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Sync">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Sync</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Config">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Config</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Rcvg Primary">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Rcvg Primary</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Stall">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Stall</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Overflow">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Overflow</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Ratio Error">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Ratio Error</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Pattern Error">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Pattern Error</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Aux Warning">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Aux Warning</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Sync 2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Sync 2</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Tooth">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Tooth</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Forward">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Forward</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="CycleCount">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>CycleCount</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="StartCAD">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>StartCAD</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="EndCAD">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EndCAD</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="CurrentCAD">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>CurrentCAD</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="MaxCAD">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>MaxCAD</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="HistoryCAD">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>HistoryCAD</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="CADRate">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>CADRate</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="AvgSpeed">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>AvgSpeed</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Address">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Address</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Primary">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Primary</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Primary State">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Primary State</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Aux 1 State">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Aux 1 State</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Aux 2 State">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Aux 2 State</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Aux 3 State">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Aux 3 State</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Aux 4 State">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Aux 4 State</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable1">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable1</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Sync Enable">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Sync Enable</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Clear Errors">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Clear Errors</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Sim Enable">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Sim Enable</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Watchdog">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Watchdog</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Sim Rate">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Sim Rate</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD1">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD1</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD1">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD1</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Aux 1">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Aux 1</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Aux 2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Aux 2</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Aux 3">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Aux 3</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Aux 4">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Aux 4</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder1_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder1_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder1_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder1_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Watchdog Error">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Watchdog Error</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder2_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder2_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder2_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder2_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD2</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD2</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable2</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder3_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder3_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder3_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder3_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD3">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD3</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD3">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD3</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable3">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable3</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder4_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder4_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder4_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder4_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD4">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD4</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD4">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD4</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable4">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable4</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder5_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder5_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder5_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder5_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD5">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD5</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD5">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD5</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable5">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable5</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder6_H_F [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder6_H_F [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder6_H_R [CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Cylinder6_H_R [CAD]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_FallingCAD6">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_FallingCAD6</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="OpWin_RisingCAD6">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpWin_RisingCAD6</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpWin_Enable6">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>OpWin_Enable6</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Cylinder_Number">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder_Number</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Speed_Output">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Speed_Output</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="CAN_Trigger">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>CAN_Trigger</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="Injection_Sig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Injection_Sig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值" name="Delay[tick]">
+		<DESC>Delay of the output rising and falling edges with respect to the input rising and falling edges, respectively, in terms of 40 MHz clock ticks.</DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>Delay[tick]</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=79 type="布尔" name="OpenWinSig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>OFF</STRING><STRING>ON</STRING><STRING>OFF</STRING><STRING>ON</STRING></STRINGS></MLABEL></PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>OpenWinSig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+</CONTENT>
+</VI>
+
+

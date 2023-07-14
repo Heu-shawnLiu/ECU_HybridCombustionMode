@@ -1,0 +1,2735 @@
+<VI syntaxVersion=11 LVversion=20008000 revision=513 name="EPTxRTadd-ontest2.vi">
+<TITLE><NO_TITLE name="EPTxRTadd-ontest2.vi"></TITLE>
+<HELP_PATH></HELP_PATH>
+<HELP_TAG></HELP_TAG>
+<RTM_PATH type="default"></RTM_PATH>
+<DESC></DESC>
+<CONTENT>
+	<GROUPER>
+		<PARTS>
+		</PARTS></GROUPER>
+	<CONTROL ID=100 type="自定义类型" name="EPTxState">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>CLuster of high level EPTx control parameters</DESC>
+					<TIP>CLuster of high level EPTx control parameters</TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Clear_Errors">
+							<DESC>Clears all errors indicated within the EPTxSupervisor.  It is not recommended to leave this control set to TRUE, otherwise errors will not be identified.  This control should be used manually, or with limited programmatic use.</DESC>
+							<TIP>Clears all errors indicated within the EPTxSupervisor</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Sync_Enable">
+							<DESC>TRUE: Enables the EPTx to achieve sync when the engine is spinning.<LF>
+<LF>
+FALSE: Prevents the EPTx from achieving sync when the engine is spinning, and sets the EPTxSupervisor to default values.</DESC>
+							<TIP>Enables the EPTx to achieve sync when the engine is spinning</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Sim_Enable">
+							<DESC>Enables position tracking simulation within the EPTx core.  When enabled, the external position signals are ignored and the EPTxSupervisor position is simulated according to the specified Sim Speed (RPM).</DESC>
+							<TIP>Enables position tracking simulation within the EPTx core</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Sim_Speed_[RPM]">
+							<DESC> When Sim Enable is TRUE, the external position signals are ignored and the EPTxSupervisor position is simulated according to the specified Sim Speed (RPM).</DESC>
+							<TIP>Specifies the simulated engine speed within the EPTx core</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxState</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxData">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters which indicate the status of sync, position, speed and errors.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Sync">
+							<DESC>Indicates the status of EPTx sync.</DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Speed_[RPM]">
+							<DESC>Indicates the most recent calculated rotational rate of the crankshaft in RPM.</DESC>
+							<TIP>Indicates the most recent calculated rotational rate of the crankshaft in RPM</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="CurrentCAD">
+							<DESC>Indicates the current position tracked by the EPTx in Crank Angle Degrees (CAD).</DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Stall">
+							<DESC>Indicates that the engine speed is less than the Stall Speed specified to the EPTx - Core Control.vi at the RT level.</DESC>
+							<TIP>Indicates that the engine speed is less than the Stall Speed</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Overflow">
+							<DESC>Indicates that the EPTx has encountered a fixed-point math result overflow.  This condition causes a loss of sync.</DESC>
+							<TIP>Indicates that the EPTx has encountered a fixed-point math result overflow</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Ratio_Error">
+							<DESC>Indicates that the actual signal event ratio canot be matched to any possible nominal signal event ratios within the primary signal pattern.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match any possible nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Pattern_Error">
+							<DESC>Indicates that the actual signal event ratio does not match the expected nominal signal event ratio.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match the expected nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Config">
+							<DESC>Indicates that the EPTx has been configured by the RT level device driver.</DESC>
+							<TIP>Indicates that the EPTx has been configured by the RT level device driver</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Watchdog_Error">
+							<DESC>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds.</DESC>
+							<TIP>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux_Warning">
+							<DESC>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location.</DESC>
+							<TIP>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Rcvg_Primary">
+							<DESC>Indicates that the primary signal is changing states, which indicates that the crankshaft is spinning.</DESC>
+							<TIP>Indicates that the primary signal is changing states</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxData</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxFilters">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters for specifying the glitch filtering of EPTx primary and auxiliary signals.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=80 type="数值" name="Primary_[s]">
+							<DESC>Specifies the glitch filter time, in seconds, for the associated signal.  As the signal changes state, the filter algorithm will reject any positive or negative glitches less than the filter time.  It is recommended to use a non-zero value for this parameter, on the order of 1 to 5 microseconds.  Larger values may be used.  However, if values exceeding 20 microseconds are required to achieve reliable pattern signals, then there may be a problem related to external wiring paths or grounding.<LF>
+<LF>
+Note: This filter algorithm will impose a delay on the signal equal to the specified filter time.</DESC>
+							<TIP>Specifies the glitch filter time, in seconds, for the associated signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_1_[s]">
+							<DESC>Specifies the glitch filter time, in seconds, for the associated signal.  As the signal changes state, the filter algorithm will reject any positive or negative glitches less than the filter time.  It is recommended to use a non-zero value for this parameter, on the order of 1 to 5 microseconds.  Larger values may be used.  However, if values exceeding 20 microseconds are required to achieve reliable pattern signals, then there may be a problem related to external wiring paths or grounding.<LF>
+<LF>
+Note: This filter algorithm will impose a delay on the signal equal to the specified filter time.</DESC>
+							<TIP>Specifies the glitch filter time, in seconds, for the associated signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_2_[s]">
+							<DESC>Specifies the glitch filter time, in seconds, for the associated signal.  As the signal changes state, the filter algorithm will reject any positive or negative glitches less than the filter time.  It is recommended to use a non-zero value for this parameter, on the order of 1 to 5 microseconds.  Larger values may be used.  However, if values exceeding 20 microseconds are required to achieve reliable pattern signals, then there may be a problem related to external wiring paths or grounding.<LF>
+<LF>
+Note: This filter algorithm will impose a delay on the signal equal to the specified filter time.</DESC>
+							<TIP>Specifies the glitch filter time, in seconds, for the associated signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_3_[s]">
+							<DESC>Specifies the glitch filter time, in seconds, for the associated signal.  As the signal changes state, the filter algorithm will reject any positive or negative glitches less than the filter time.  It is recommended to use a non-zero value for this parameter, on the order of 1 to 5 microseconds.  Larger values may be used.  However, if values exceeding 20 microseconds are required to achieve reliable pattern signals, then there may be a problem related to external wiring paths or grounding.<LF>
+<LF>
+Note: This filter algorithm will impose a delay on the signal equal to the specified filter time.</DESC>
+							<TIP>Specifies the glitch filter time, in seconds, for the associated signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_4_[s]">
+							<DESC>Specifies the glitch filter time, in seconds, for the associated signal.  As the signal changes state, the filter algorithm will reject any positive or negative glitches less than the filter time.  It is recommended to use a non-zero value for this parameter, on the order of 1 to 5 microseconds.  Larger values may be used.  However, if values exceeding 20 microseconds are required to achieve reliable pattern signals, then there may be a problem related to external wiring paths or grounding.<LF>
+<LF>
+Note: This filter algorithm will impose a delay on the signal equal to the specified filter time.</DESC>
+							<TIP>Specifies the glitch filter time, in seconds, for the associated signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxFilters</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name=" PatternConfig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters for configuring simulated pattern output.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=80 type="数值" name="Aux_Offset_1_[CAD]">
+							<DESC>Specifies the offset of the simulated Auxiliary 1 signal, in Crank Angle Degrees (CAD), with respect to the nominal Auxiliary 1 signal pattern offset specified in the EPTx configuration file.</DESC>
+							<TIP>Specifies the offset of the simulated Auxiliary 1 signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_Offset_2_[CAD]">
+							<DESC>Specifies the offset of the simulated Auxiliary 2 signal, in Crank Angle Degrees (CAD), with respect to the nominal Auxiliary 2 signal pattern offset specified in the EPTx configuration file.</DESC>
+							<TIP>Specifies the offset of the simulated Auxiliary 2 signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_Offset_3_[CAD]">
+							<DESC>Specifies the offset of the simulated Auxiliary 3 signal, in Crank Angle Degrees (CAD), with respect to the nominal Auxiliary 3 signal pattern offset specified in the EPTx configuration file.</DESC>
+							<TIP>Specifies the offset of the simulated Auxiliary 3 signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Aux_Offset_4_[CAD]">
+							<DESC>Specifies the offset of the simulated Auxiliary 4 signal, in Crank Angle Degrees (CAD), with respect to the nominal Auxiliary 4 signal pattern offset specified in the EPTx configuration file.</DESC>
+							<TIP>Specifies the offset of the simulated Auxiliary 4 signal</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Max_Rate_[Hz]">
+							<DESC>When pattern signals are simulated and connected to other functions and external devices, there may be a maximum input frequency or minimum pulsewidth allowed by those functions and devices.  This parameter specifies the maximum frequency for simulated output signals.<LF>
+<LF>
+As engine speed increases, or engine speed fluctuations are encountered, the simulated pattern output must temporarily operate faster in order to keep up with minor engine speed increases from one tooth to the next.  This parameter can specify the maximum rate at which the simulated signals are allowed to operate in order to track with true engine position.<LF>
+<LF>
+Note: If it is desired to have no frequency limit, then a special value of 0 may be specified.<LF>
+<LF>
+Note:  If the specified maximum frequency is too low, then the simulated signal may be slowed down to the point of imposing large accummulated delays with respect to the true engine position.<LF>
+<LF>
+Note: If the specified maximum frequency is too high, then the function or device receiving the signal may not properly process the signal.</DESC>
+							<TIP>Specifies the maximum frequency for simulated output signals</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT> PatternConfig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="SimulatorConfig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>Cluster of parameters for configuring the EPTx position simulator.</DESC>
+					<TIP>Cluster of parameters for configuring the EPTx position simulator</TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=80 type="数值" name="Rotations">
+							<DESC>Specifies the number of crank rotations per engine cycle for simulated position.</DESC>
+							<TIP>Specifies the number of crank rotations per engine cycle for simulated position</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Pause_Angle_[CAD]">
+							<DESC>Specifies the angle in Crank Angle Degrees (CAD) at which the position simulator should pause when the Pause control is set to TRUE.</DESC>
+							<TIP>Specifies the angle in Crank Angle Degrees (CAD) at which the position simulator should pause</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Pause">
+							<DESC>When TRUE, pauses and holds the simulated engine position upon reaching the Pause Angle.</DESC>
+							<TIP>When TRUE, pauses and holds the simulated engine position upon reaching the Pause Angle</TIP>
+							<PARTS>
+								<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Sim_Speed_[RPM]">
+							<DESC>Controls the simulated engine speed in RPM.</DESC>
+							<TIP>Controls the simulated engine speed in RPM</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Ramp_Rate">
+							<DESC>Controls the ramp rate, in RPM per second, of the simulated engine speed upon a change to the Sim Speed parameter within this cluster.</DESC>
+							<TIP>Controls the ramp rate, in RPM per second, of the simulated engine speed upon a change to the Sim Speed</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Max_Offset_[RPM]">
+							<DESC>Specifies the RPM fluctuation to be superimposed on the simulated engine speed in order to simulate true engine speed fluctuations due to cylinder compression and expansion.</DESC>
+							<TIP>Specifies the RPM fluctuation to be superimposed on the simulated engine speed</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Cylinders">
+							<DESC>Specifies the number of cylinders in the simulated engine position in order to simulate true speed fluctuations due to cylinder compression and expansion.</DESC>
+							<TIP>Specifies the number of cylinders in the simulated engine position</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>SimulatorConfig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxPatternConfig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>This cluster should be wired directly to the EPTxPatternConfig input cluster of the Pattern Output.vi at the FPGA level.<LF>
+<LF>
+There should be no other interaction with the individual elements of this cluster.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=100 type="自定义类型" name="Pattern">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+								<PART ID=8010 order=0 type="自定义类型控件">
+									<CONTROL ID=83 type="簇" name="">
+										<DESC></DESC>
+										<TIP></TIP>
+										<PARTS>
+										</PARTS>
+										<CONTENT>
+											<GROUPER>
+												<PARTS>
+												</PARTS></GROUPER>
+											<CONTROL ID=80 type="数值" name="Primary">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=80 type="数值" name="Aux_1">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=80 type="数值" name="Aux_2">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=80 type="数值" name="Aux_3">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=80 type="数值" name="Aux_4">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=79 type="布尔" name="Primary_State">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=79 type="布尔" name="Aux_1_State">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=79 type="布尔" name="Aux_2_State">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=79 type="布尔" name="Aux_3_State">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+												</PARTS>
+											</CONTROL>
+											<CONTROL ID=79 type="布尔" name="Aux_4_State">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+													<PART ID=22 order=0 type="布尔文本"><MLABEL><STRINGS><STRING>Boolean Text</STRING></STRINGS></MLABEL></PART>
+												</PARTS>
+											</CONTROL>
+										</CONTENT>
+									</CONTROL>
+								</PART>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Address">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxPatternConfig</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxControl">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>This cluster should be wired directly to the EPTxControl input cluster of the EPTx - Core.vi at the FPGA level.<LF>
+<LF>
+There should be no other interaction with the individual elements of this cluster.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Clear_Errors">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Watchdog">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Sync_Enable">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Sim_Enable">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="Sim_Rate">
+							<DESC> When Sim Enable is TRUE, the external position signals are ignored and the EPTxSupervisor position is simulated according to the specified Sim Rate in Crank Angle Degrees (CAD) per millisecond.</DESC>
+							<TIP>Specifies the rate of internal position simulation in CAD per millisecond</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxControl</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=100 type="自定义类型" name="EPTxSupervisor_rt">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=8010 order=0 type="自定义类型控件">
+				<CONTROL ID=83 type="簇" name="">
+					<DESC>This cluster should be wired directly from the EPTxSupervisor output cluster of the EPTx - Core.vi at the FPGA level.<LF>
+<LF>
+There should be no other interaction with the individual elements of this cluster.</DESC>
+					<TIP></TIP>
+					<PARTS>
+						<PART ID=82 order=0 type="标题"><LABEL><STEXT></STEXT></LABEL></PART>
+					</PARTS>
+					<CONTENT>
+						<GROUPER>
+							<PARTS>
+							</PARTS></GROUPER>
+						<CONTROL ID=79 type="布尔" name="Sync">
+							<DESC>Indicates the status of EPTx sync.</DESC>
+							<TIP>Indicates the status of EPTx sync</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="CADRate">
+							<DESC>Indicates the most recent calculated rotational rate of the crankshaft in Crank Angle Degrees (CAD) per millisecond.</DESC>
+							<TIP>Indicates the most recent calculated rotational rate of the crankshaft in Crank Angle Degrees (CAD) per millisecond</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="CurrentCAD">
+							<DESC>Indicates the current position tracked by the EPTx in Crank Angle Degrees (CAD).</DESC>
+							<TIP>Indicates the current position tracked by the EPTx in Crank Angle Degrees (CAD)</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="HistoryCAD">
+							<DESC>A span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD.  When an angle-one-shot function event is scheduled for the future and then changed to the recent past, a late one-shot event will be triggered if the newly scheduled event (in the past) is within HistoryCAD range of CurrentPosition.</DESC>
+							<TIP>A span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="MaxCAD">
+							<DESC>The total Crank Angle Degrees (CAD) travelled through a complete engine cycle.  A two-stroke engine crankshaft will travel 360 degrees in a complete engine cycle.  A four-stroke engine crankshaft will travel 720 degrees in a complete engine cycle.</DESC>
+							<TIP>The total Crank Angle Degrees (CAD) travelled through a complete engine cycle</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Stall">
+							<DESC>Indicates that the engine speed is less than the Stall Speed specified to the EPTx - Core Control.vi at the RT level.</DESC>
+							<TIP>Indicates that the engine speed is less than the Stall Speed</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Overflow">
+							<DESC>Indicates that the EPTx has encountered a fixed-point math result overflow.  This condition causes a loss of sync.</DESC>
+							<TIP>Indicates that the EPTx has encountered a fixed-point math result overflow</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Ratio_Error">
+							<DESC>Indicates that the actual signal event ratio canot be matched to any possible nominal signal event ratios within the primary signal pattern.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match any possible nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Pattern_Error">
+							<DESC>Indicates that the actual signal event ratio does not match the expected nominal signal event ratio.  This error causes a loss of sync.</DESC>
+							<TIP>Indicates that the actual ratio does not match the expected nominal ratio</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Config">
+							<DESC>Indicates that the EPTx has been configured by the RT level device driver.</DESC>
+							<TIP>Indicates that the EPTx has been configured by the RT level device driver</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Watchdog_Error">
+							<DESC>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds.</DESC>
+							<TIP>Indicates that the EPTx watchdog has not been reset by the EPTx - Core Control.vi at the RT level within 100 milliseconds</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Aux_Warning">
+							<DESC>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location.</DESC>
+							<TIP>Indicates that the EPTx received an auxiliary signal rising edge, falling edge or level at an unexpected location</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=80 type="数值" name="AvgSpeed">
+							<DESC>Indicates the most recent calculated average rotational rate of the crankshaft in Rotations per Minute (RPM)</DESC>
+							<TIP>Indicates the most recent calculated average rotational rate of the crankshaft in Rotations per Minute (RPM)</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+						<CONTROL ID=79 type="布尔" name="Rcvg_Primary">
+							<DESC>Indicates that the primary signal is changing states, which indicates that the crankshaft is spinning.</DESC>
+							<TIP>Indicates that the primary signal is changing states</TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</CONTENT>
+				</CONTROL>
+			</PART>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSupervisor_rt</STEXT></LABEL></PART>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="Lighting">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=79 type="布尔" name="Pattern_Loading">
+				<DESC>Indicates that the Pattern Control.vi is in process of loading the pattern file to the Pattern Output.vi at the FPGA level.</DESC>
+				<TIP>Indicates that the Pattern Control.vi is in process of loading the pattern file to the Pattern Output.vi at the FPGA level</TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Pattern_Loading</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=79 type="布尔" name="Sim_Loading">
+				<DESC>Indicates that the Simulation Control.vi is in process of loading data to the Simulator.vi at the FPGA level.</DESC>
+				<TIP>Indicates that the Simulation Control.vi is in process of loading data to the Simulator.vi at the FPGA level</TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Sim_Loading</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=79 type="布尔" name="Config_Loading">
+				<DESC>Indicates that the Simulation Control.vi is in process of loading data to the Simulator.vi at the FPGA level.</DESC>
+				<TIP>Indicates that the Simulation Control.vi is in process of loading data to the Simulator.vi at the FPGA level</TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Config_Loading</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="Config_number">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=100 type="自定义类型" name="EPTxConfig">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=80 type="数值" name="EPTxConfig">
+							<DESC>This cluster should be wired directly to the EPTxConfig input cluster of the EPTx - Core.vi at the FPGA level.<LF>
+<LF>
+There should be no other interaction with the individual elements of this cluster.</DESC>
+							<TIP></TIP>
+							<PARTS>
+								<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxConfig</STEXT></LABEL></PART>
+							</PARTS>
+						</CONTROL>
+					</PART>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxConfig</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=100 type="自定义类型" name="EPTxSimulatorConfig">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=80 type="数值" name="EPTxSimulatorConfig">
+							<DESC>This cluster should be wired directly to the EPTxSimulatorConfig input cluster of the Simulator.vi at the FPGA level.<LF>
+<LF>
+There should be no other interaction with the individual elements of this cluster.</DESC>
+							<TIP></TIP>
+							<PARTS>
+								<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSimulatorConfig</STEXT></LABEL></PART>
+							</PARTS>
+						</CONTROL>
+					</PART>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>EPTxSimulatorConfig</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="RT_Input">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=79 type="布尔" name="Load">
+				<DESC>When TRUE, commands the EPTx - Core Control.vi and Pattern Control.vi  to load the EPTx configuration file and pattern file to the EPTx - Core.vi and Pattern Output.vi at the FPGA level.</DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Load</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值" name="History_[CAD]">
+				<DESC>Specifies a span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD.  When an angle-one-shot function event is scheduled for the future and then changed to the recent past, a late one-shot event will be triggered if the newly scheduled event (in the past) is within HistoryCAD range of CurrentPosition.<LF>
+<LF>
+The value of HistoryCAD should be larger than the expected maximum position change to an Angle One-Shot VI at the FPGA level.  For example, if an angle one-shot (AOS) VI is expected to have an operating range of 40 CAD, then HistoryCAD should be 45 CAD.  If the angle one-shot position is scheduled for the near future and then is changed to 40 CAD in the recent past, then it will be triggered immediately, even though it is late.  A late AOS is better than no AOS.</DESC>
+				<TIP>Specifies a span of Crank Angle Degrees (CAD) in the recent past, with respect to CurrentCAD</TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>History_[CAD]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值" name="Stall_Speed_[RPM]">
+				<DESC>Specifies the engine speed below which the EPTx considers the engine to be stalled.</DESC>
+				<TIP>Specifies the engine speed below which the EPTx considers the engine to be stalled</TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Stall_Speed_[RPM]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值" name="Delay_time[ms]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Delay_time[ms]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="Control_strategy_input">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值" name="Injection_duration[ms]">
+				<DESC>Time to be converted to Crank Angle Degrees.</DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Injection_duration[ms]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值" name="Injection_DBTDC">
+				<DESC>Time to be converted to Crank Angle Degrees.</DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Injection_DBTDC</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="CylinderSig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=83 type="簇" name="CylinderSig_1">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_1</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder1_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder1_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder1_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder1_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇" name="CylinderSig_2">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_2</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder2_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder2_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder2_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder2_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇" name="CylinderSig_3">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_3</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder3_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder3_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder3_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder3_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇" name="CylinderSig_4">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_4</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder4_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder4_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder4_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder4_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇" name="CylinderSig_5">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_5</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder5_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder5_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder5_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder5_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇" name="CylinderSig_6">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>CylinderSig_6</STEXT></LABEL></PART>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值" name="Cylinder6_H_F[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder6_H_F[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值" name="Cylinder6_H_R[CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+							<PART ID=82 order=0 type="标题"><LABEL><STEXT><FONT predef=DLGFONT>Cylinder6_H_R[CAD]</STEXT></LABEL></PART>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇" name="Tick_output">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+			<PART ID=82 order=0 type="标题"><LABEL><STEXT>簇</STEXT></LABEL></PART>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值" name="Duration[Ticks]">
+				<DESC>Ticks of the clock equivalent to Time in milliseconds.</DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Duration[Ticks]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值" name="Delay[Ticks]">
+				<DESC>Ticks of the clock equivalent to Time in milliseconds.</DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=82 order=0 type="标题"><LABEL><STEXT>Delay[Ticks]</STEXT></LABEL></PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+</CONTENT>
+<BDCONTENT>
+	<CONTROL ID=83 type="簇常量" name="Config_number">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=100 type="自定义类型" name="EPTxSimulatorConfig">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=80 type="数值常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=100 type="自定义类型" name="EPTxConfig">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=80 type="数值常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="y">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="x">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<NODE ID=47 type="Function" primID=20564944 primName="除">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=80 type="数值常量" name="Clock Frequency (MHz, 40)">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=83 type="簇常量" name="Tick_output">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Delay[Ticks]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Duration[Ticks]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=49 type="SubVI" subVIName="time2ticks.vi">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=49 type="SubVI" subVIName="time2ticks.vi">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=49 type="SubVI" subVIName="Time2CAD.vi">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_6">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder6_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder6_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_5">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder5_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder5_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_4">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder4_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder4_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_3">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder3_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder3_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_2">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder2_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder2_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+			<CONTROL ID=83 type="簇常量" name="CylinderSig_1">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+				<CONTENT>
+					<GROUPER>
+						<PARTS>
+						</PARTS></GROUPER>
+					<CONTROL ID=80 type="数值常量" name="Cylinder1_H_F [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+					<CONTROL ID=80 type="数值常量" name="Cylinder1_H_R [CAD]">
+						<DESC></DESC>
+						<TIP></TIP>
+						<PARTS>
+						</PARTS>
+					</CONTROL>
+				</CONTENT>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20444441 primName="加">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=20425553 primName="减">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_6">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder6_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder6_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_5">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder5_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder5_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_4">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder4_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder4_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_3">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder3_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder3_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_2">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder2_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder2_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="CylinderSig_1">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=80 type="数值常量" name="Cylinder1_H_F [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=80 type="数值常量" name="Cylinder1_H_R [CAD]">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=49 type="SubVI" subVIName="Time2CAD.vi">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=83 type="簇常量" name="Cluster">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+		<CONTENT>
+			<GROUPER>
+				<PARTS>
+				</PARTS></GROUPER>
+			<CONTROL ID=79 type="假常量" name="Config Loading">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=79 type="假常量" name="Sim Loading">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=79 type="假常量" name="Pattern Loading">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+				</PARTS>
+			</CONTROL>
+		</CONTENT>
+	</CONTROL>
+	<NODE ID=99 type="(Un)Bundle by Name">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=108 type="Compound Arithmetic Node">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=47 type="Function" primID=54494E49 primName="首次调用？">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=44 type="Select">
+		<DESC></DESC>
+		<BDCONTENT>
+			<CONTROL ID=100 type="自定义类型" name="EPTxSettings_New_0">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=83 type="簇常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+							<CONTENT>
+								<GROUPER>
+									<PARTS>
+									</PARTS></GROUPER>
+								<CONTROL ID=100 type="自定义类型" name="Aux Threshold Max">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Aux 4">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 3">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 2">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 1">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=100 type="自定义类型" name="Aux Threshold Min">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Aux 4">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 3">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 2">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 1">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Token">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Token">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=80 type="数值常量" name="End Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="End Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 2 Min">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 2 Max">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 2 Type">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 2">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 1 Min">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 1 Max">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 1 Type">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 1">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Start Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Start Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Length">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Pattern">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=80 type="数值常量" name="dAngle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Ratio Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Ratio Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=100 type="自定义类型" name="Tooth">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Parameter">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Level">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=100 type="自定义类型" name="Direction<LF>
+Detection">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+															<PART ID=8010 order=0 type="自定义类型控件">
+																<CONTROL ID=87 type="Enum" name="">
+																	<DESC></DESC>
+																	<TIP></TIP>
+																	<PARTS>
+																		<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																	</PARTS>
+																</CONTROL>
+															</PART>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Falling Edge">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Rising Edge">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Thresholds">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=80 type="数值常量" name="Numeric">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Ratios">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=80 type="数值常量" name="Numeric">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Rotation">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+							</CONTENT>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=100 type="自定义类型" name="EPTxPatternSettings_0">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=83 type="簇常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+							<CONTENT>
+								<GROUPER>
+									<PARTS>
+									</PARTS></GROUPER>
+								<CONTROL ID=82 type="数组常量" name="Aux 4">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 3">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 2">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 1">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Primary">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Cylinders">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Rotations">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+							</CONTENT>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+		</BDCONTENT>
+		<BDCONTENT>
+			<CONTROL ID=100 type="自定义类型" name="EPTxSettings_New_in">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=83 type="簇常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+							<CONTENT>
+								<GROUPER>
+									<PARTS>
+									</PARTS></GROUPER>
+								<CONTROL ID=100 type="自定义类型" name="Aux Threshold Max">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Aux 4">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 3">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 2">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 1">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=100 type="自定义类型" name="Aux Threshold Min">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Aux 4">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 3">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 2">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=80 type="数值常量" name="Aux 1">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Token">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Token">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=80 type="数值常量" name="End Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="End Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 2 Min">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 2 Max">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 2 Type">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 2">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 1 Min">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Aux 1 Max">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 1 Type">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=100 type="自定义类型" name="Aux 1">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																	<PART ID=8010 order=0 type="自定义类型控件">
+																		<CONTROL ID=87 type="Enum" name="">
+																			<DESC></DESC>
+																			<TIP></TIP>
+																			<PARTS>
+																				<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																			</PARTS>
+																		</CONTROL>
+																	</PART>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Start Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Start Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Length">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Pattern">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=80 type="数值常量" name="dAngle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Ratio Count">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Ratio Index">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=100 type="自定义类型" name="Tooth">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+										<PART ID=8010 order=0 type="自定义类型控件">
+											<CONTROL ID=83 type="簇常量" name="">
+												<DESC></DESC>
+												<TIP></TIP>
+												<PARTS>
+												</PARTS>
+												<CONTENT>
+													<GROUPER>
+														<PARTS>
+														</PARTS></GROUPER>
+													<CONTROL ID=80 type="数值常量" name="Parameter">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Level">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=100 type="自定义类型" name="Direction<LF>
+Detection">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+															<PART ID=8010 order=0 type="自定义类型控件">
+																<CONTROL ID=87 type="Enum" name="">
+																	<DESC></DESC>
+																	<TIP></TIP>
+																	<PARTS>
+																		<PART ID=12 order=0 type="下拉列表文本"><MLABEL><STRINGS></STRINGS></MLABEL></PART>
+																	</PARTS>
+																</CONTROL>
+															</PART>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Falling Edge">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+													<CONTROL ID=79 type="假常量" name="Rising Edge">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+													</CONTROL>
+												</CONTENT>
+											</CONTROL>
+										</PART>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Thresholds">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=80 type="数值常量" name="Numeric">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Ratios">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=80 type="数值常量" name="Numeric">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Rotation">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+							</CONTENT>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+			<CONTROL ID=100 type="自定义类型" name="EPTxPatternSettings">
+				<DESC></DESC>
+				<TIP></TIP>
+				<PARTS>
+					<PART ID=8010 order=0 type="自定义类型控件">
+						<CONTROL ID=83 type="簇常量" name="">
+							<DESC></DESC>
+							<TIP></TIP>
+							<PARTS>
+							</PARTS>
+							<CONTENT>
+								<GROUPER>
+									<PARTS>
+									</PARTS></GROUPER>
+								<CONTROL ID=82 type="数组常量" name="Aux 4">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 3">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 2">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Aux 1">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=82 type="数组常量" name="Primary">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+									<CONTENT>
+										<CONTROL ID=100 type="自定义类型" name="Pattern">
+											<DESC></DESC>
+											<TIP></TIP>
+											<PARTS>
+												<PART ID=8010 order=0 type="自定义类型控件">
+													<CONTROL ID=83 type="簇常量" name="">
+														<DESC></DESC>
+														<TIP></TIP>
+														<PARTS>
+														</PARTS>
+														<CONTENT>
+															<GROUPER>
+																<PARTS>
+																</PARTS></GROUPER>
+															<CONTROL ID=79 type="假常量" name="State">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+															<CONTROL ID=80 type="数值常量" name="Angle">
+																<DESC></DESC>
+																<TIP></TIP>
+																<PARTS>
+																</PARTS>
+															</CONTROL>
+														</CONTENT>
+													</CONTROL>
+												</PART>
+											</PARTS>
+										</CONTROL>
+									</CONTENT>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Cylinders">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+								<CONTROL ID=80 type="数值常量" name="Rotations">
+									<DESC></DESC>
+									<TIP></TIP>
+									<PARTS>
+									</PARTS>
+								</CONTROL>
+							</CONTENT>
+						</CONTROL>
+					</PART>
+				</PARTS>
+			</CONTROL>
+		</BDCONTENT>
+	</NODE>
+	<CONTROL ID=80 type="数值常量" name="Cylinder TDC [Absolute CAD]">
+		<DESC></DESC>
+		<TIP></TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<NODE ID=49 type="SubVI" subVIName="Simulation Control.vi">
+		<DESC></DESC>
+	</NODE>
+	<CONTROL ID=80 type="数值常量" name="Frequency (40M) [Hz]">
+		<DESC>Specifies the FPGA single cycle loop execution rate in which the FPGA EPTx - Core.vi is placed.</DESC>
+		<TIP>Specifies the FPGA single cycle loop execution rate in which the FPGA EPTx - Core.vi is placed</TIP>
+		<PARTS>
+		</PARTS>
+	</CONTROL>
+	<NODE ID=49 type="SubVI" subVIName="Pattern Control.vi">
+		<DESC></DESC>
+	</NODE>
+	<NODE ID=49 type="SubVI" subVIName="EPTx - Core Control.vi">
+		<DESC></DESC>
+	</NODE>
+</BDCONTENT>
+</VI>
+
+
